@@ -1,11 +1,14 @@
+import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
+import "express-async-errors";
 const app = express();
 import morgan from "morgan";
 
 import authRouter from "./routes/authRoutes.js";
-// import errorHandlerMiddleware from "./midlware/error-handler.js";
+import errorHandlerMiddleware from "./midlware/error-handler.js";
 
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -15,7 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRouter);
 
-// app.use(errorHandlerMiddleware);
+app.use(errorHandlerMiddleware);
 
 mongoose.set("strictQuery", false);
 
