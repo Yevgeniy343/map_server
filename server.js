@@ -3,12 +3,19 @@ import mongoose from "mongoose";
 const app = express();
 import morgan from "morgan";
 
+import authRouter from "./routes/authRoutes.js";
+// import errorHandlerMiddleware from "./midlware/error-handler.js";
+
 app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.json({ msg: "welcom" });
 });
+
+app.use("/api/auth", authRouter);
+
+// app.use(errorHandlerMiddleware);
 
 mongoose.set("strictQuery", false);
 
