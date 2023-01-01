@@ -6,7 +6,10 @@ const app = express();
 import morgan from "morgan";
 
 import authRouter from "./routes/authRoutes.js";
+
+import notFoundMiddleware from "./midlware/not-found.js";
 import errorHandlerMiddleware from "./midlware/error-handler.js";
+import authenticateUser from "./midlware/auth.js";
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRouter);
 
+app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
 mongoose.set("strictQuery", false);
