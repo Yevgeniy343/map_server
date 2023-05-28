@@ -30,7 +30,7 @@ mongoose.set("strictQuery", false);
 
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.kqnkxm9.mongodb.net/crm`
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.zuu1om7.mongodb.net/shop`
   )
   .then(() => {
     app.listen(1000);
