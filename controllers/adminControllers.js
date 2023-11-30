@@ -7,7 +7,6 @@ import {
 import { generate } from "random-words";
 import { nanoid } from "nanoid";
 import { bot } from "../bot.js";
-const channelId = -4018916107;
 
 const login = async (req, res) => {
   console.log(req.body);
@@ -23,10 +22,11 @@ const login = async (req, res) => {
   if (!admin) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-  if (password !== admin.password) {
+  const isPasswordCorrect = await admin.comparePassword(password);
+  if (!isPasswordCorrect) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-  console.log(admin);
+
   res.status(StatusCodes.OK).json({ admin: login });
 };
 
@@ -35,10 +35,14 @@ const remindPass = async (req, res) => {
     const word = generate({ minLength: 4, maxLength: 6 });
     const number = Math.floor(Math.random() * 8999 + 1000);
     const new_pass = word + number;
-    console.log(new_pass);
     let admin = await Admin.findOne({});
-    console.log(admin);
-    bot.sendMessage(channelId, new_pass);
+    if (!admin) {
+      throw new Error("Admin not found");
+    }
+    admin.password = new_pass;
+    await admin.save();
+    const channelId = process.env.CHANNEL_ID;
+    bot.sendMessage(channelId, `Новый пароль: \n ${new_pass}`);
   } catch (error) {
     throw new BadRequestError("Error 500");
   }
