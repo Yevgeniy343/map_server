@@ -7,10 +7,10 @@ import {
 import { generate } from "random-words";
 import { nanoid } from "nanoid";
 import { bot } from "../bot.js";
+const channelId = -4018916107;
 
 const login = async (req, res) => {
   console.log(req.body);
-  bot.sendMessage(channelId, "Вход в админ панель");
 
   const { login, password } = req.body;
 
@@ -27,6 +27,7 @@ const login = async (req, res) => {
     throw new UnAuthenticatedError("Не корректные данные");
   }
 
+  bot.sendMessage(channelId, "Вход в админ панель");
   res.status(StatusCodes.OK).json({ admin: login });
 };
 
