@@ -1,4 +1,5 @@
 import Admin from "../models/Admin.js";
+import Category from "../models/Category.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -49,4 +50,14 @@ const remindPass = async (req, res) => {
   }
 };
 
-export { login, remindPass };
+const createCategory = async (req, res) => {
+  console.log(req.body);
+  const { parentId, name, type } = req.body;
+  // try {
+  const category = await Category.create({ name, parentId, type });
+  // } catch (error) {
+  //   throw new BadRequestError("Error 500");
+  // }
+};
+
+export { login, remindPass, createCategory };
