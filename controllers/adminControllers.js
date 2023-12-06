@@ -45,6 +45,7 @@ const remindPass = async (req, res) => {
     await admin.save();
     const channelId = process.env.CHANNEL_ID;
     bot.sendMessage(channelId, `Новый пароль: \n ${new_pass}`);
+    res.status(StatusCodes.OK).json({ msg: "Новый пароль отправил" });
   } catch (error) {
     throw new BadRequestError("Error 500");
   }
@@ -53,14 +54,19 @@ const remindPass = async (req, res) => {
 const createCategory = async (req, res) => {
   console.log(req.body);
   const { parentId, name, type } = req.body;
+  if (!parentId && parentId !== null) {
+    throw new BadRequestError("Не указан родительский элемент");
+  }
   try {
     const category = await Category.create({ name, parentId, type });
+    res.status(StatusCodes.OK).json(category);
   } catch (error) {
     throw new BadRequestError("Error 500");
   }
 };
 
 const getCategories = async (req, res) => {
+  console.log(req.body);
   try {
     let categories = await Category.find({});
     res.status(StatusCodes.OK).json(categories);
