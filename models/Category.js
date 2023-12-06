@@ -9,14 +9,14 @@ const CategorySchema = new mongoose.Schema(
     },
     parentId: {
       type: String,
-      required: [true, "Please provide parentId"],
+      // required: [true, "Please provide parentId"],
       trim: true,
     },
-    type: {
-      type: String,
-      required: [true, "Please provide type"],
-      trim: true,
-    },
+    // type: {
+    //   type: String,
+    //   required: [true, "Please provide type"],
+    //   trim: true,
+    // },
   },
   { timestamps: true }
 );

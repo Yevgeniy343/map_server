@@ -53,11 +53,20 @@ const remindPass = async (req, res) => {
 const createCategory = async (req, res) => {
   console.log(req.body);
   const { parentId, name, type } = req.body;
-  // try {
-  const category = await Category.create({ name, parentId, type });
-  // } catch (error) {
-  //   throw new BadRequestError("Error 500");
-  // }
+  try {
+    const category = await Category.create({ name, parentId, type });
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
 };
 
-export { login, remindPass, createCategory };
+const getCategories = async (req, res) => {
+  try {
+    let categories = await Category.find({});
+    res.status(StatusCodes.OK).json(categories);
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
+};
+
+export { login, remindPass, createCategory, getCategories };
