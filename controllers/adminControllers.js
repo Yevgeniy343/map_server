@@ -27,9 +27,9 @@ const login = async (req, res) => {
   if (!isPasswordCorrect) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-
+  const token = admin.createJWT();
   bot.sendMessage(channelId, "Вход в админ панель");
-  res.status(StatusCodes.OK).json({ admin: login });
+  res.status(StatusCodes.OK).json({ admin: login, token });
 };
 
 const remindPass = async (req, res) => {
