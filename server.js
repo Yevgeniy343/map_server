@@ -9,11 +9,13 @@ import morgan from "morgan";
 
 import authRouter from "./routes/authRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
+import auth_adminRouter from "./routes/auth_adminRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import authenticateUser from "./middleware/auth.js";
+import authenticateAdmin from "./middleware/authAdmin.js";
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +26,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRouter);
-app.use("/api/admin", adminRouter);
+app.use("/api/auth_admin", auth_adminRouter);
+app.use("/api/admin", authenticateAdmin, adminRouter);
 app.use("/api/user", userRouter);
 
 app.use(notFoundMiddleware);

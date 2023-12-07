@@ -27,7 +27,7 @@ AdminSchema.pre("save", async function () {
 });
 
 AdminSchema.methods.createJWT = function () {
-  return jwt.sign({ adminId: this._id }, "jwtSecret", { expiresIn: "1h" });
+  return jwt.sign({ adminId: this._id }, "jwtSecret", { expiresIn: "20000" });
 };
 
 AdminSchema.methods.comparePassword = async function (candidatePassword) {
