@@ -6,17 +6,8 @@ const CategorySchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide category"],
       trim: true,
+      unique: [true, "Please provide uniq category"],
     },
-    parentId: {
-      type: String,
-      // required: [true, "Please provide parentId"],
-      trim: true,
-    },
-    // type: {
-    //   type: String,
-    //   required: [true, "Please provide type"],
-    //   trim: true,
-    // },
   },
   { timestamps: true }
 );

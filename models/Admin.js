@@ -20,19 +20,19 @@ const AdminSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-AdminSchema.pre("save", async function () {
-  if (!this.isModified("password")) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
+// AdminSchema.pre("save", async function () {
+//   if (!this.isModified("password")) return;
+//   const salt = await bcrypt.genSalt(10);
+//   this.password = await bcrypt.hash(this.password, salt);
+// });
 
-AdminSchema.methods.createJWT = function () {
-  return jwt.sign({ adminId: this._id }, "jwtSecret", { expiresIn: "20000" });
-};
+// AdminSchema.methods.createJWT = function () {
+//   return jwt.sign({ adminId: this._id }, "jwtSecret", { expiresIn: "20000" });
+// };
 
-AdminSchema.methods.comparePassword = async function (candidatePassword) {
-  const isMatch = await bcrypt.compare(candidatePassword, this.password);
-  return isMatch;
-};
+// AdminSchema.methods.comparePassword = async function (candidatePassword) {
+//   const isMatch = await bcrypt.compare(candidatePassword, this.password);
+//   return isMatch;
+// };
 
 export default mongoose.model("Admin", AdminSchema);

@@ -9,25 +9,21 @@ import { bot } from "../bot.js";
 const channelId = -4018916107;
 
 const login = async (req, res) => {
-  console.log(req.body);
-
   const { login, password } = req.body;
 
   if (!login || !password) {
     throw new BadRequestError("Введите все значения");
   }
   const admin = await Admin.findOne({ login });
-
   if (!admin) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-  const isPasswordCorrect = await admin.comparePassword(password);
-  if (!isPasswordCorrect) {
+  if (password !== admin.password) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-  const token = admin.createJWT();
-  bot.sendMessage(channelId, "Вход в админ панель");
-  res.status(StatusCodes.OK).json({ admin: login, token });
+  // console.log(admin);
+  // bot.sendMessage(channelId, `admin зашел в приложение chat`);
+  res.status(StatusCodes.OK).json({ admin: login });
 };
 
 const remindPass = async (req, res) => {

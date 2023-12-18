@@ -1,5 +1,6 @@
 import Admin from "../models/Admin.js";
 import Category from "../models/Category.js";
+import SubCategory from "../models/SubCategory.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -8,12 +9,10 @@ import {
 
 const createCategory = async (req, res) => {
   console.log(req.body);
-  const { parentId, name, type } = req.body;
-  if (!parentId && parentId !== null) {
-    throw new BadRequestError("Не указан родительский элемент");
-  }
+  const { name } = req.body;
+
   try {
-    const category = await Category.create({ name, parentId, type });
+    const category = await Category.create({ name });
     res.status(StatusCodes.OK).json(category);
   } catch (error) {
     throw new BadRequestError("Error 500");
@@ -24,10 +23,22 @@ const getCategories = async (req, res) => {
   console.log(req.body);
   try {
     let categories = await Category.find({});
-    res.status(StatusCodes.OK).json(categories);
+    let subCategories = await SubCategory.find({});
+    res.status(StatusCodes.OK).json({ categories, subCategories });
   } catch (error) {
     throw new BadRequestError("Error 500");
   }
 };
 
-export { createCategory, getCategories };
+const createSubCategory = async (req, res) => {
+  console.log(req.body);
+  const { name, categoryId } = req.body;
+  try {
+    const subCategory = await SubCategory.create({ name, categoryId });
+    res.status(StatusCodes.OK).json(subCategory);
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
+};
+
+export { createCategory, getCategories, createSubCategory };
