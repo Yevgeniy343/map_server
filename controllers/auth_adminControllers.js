@@ -5,8 +5,6 @@ import {
   UnAuthenticatedError,
 } from "../errors/index-errors.js";
 import { generate } from "random-words";
-import { bot } from "../bot.js";
-const channelId = -4018916107;
 
 const login = async (req, res) => {
   const { login, password } = req.body;
@@ -22,7 +20,7 @@ const login = async (req, res) => {
     throw new UnAuthenticatedError("Не корректные данные");
   }
   // console.log(admin);
-  // bot.sendMessage(channelId, `admin зашел в приложение chat`);
+
   res.status(StatusCodes.OK).json({ admin: login });
 };
 
@@ -38,7 +36,6 @@ const remindPass = async (req, res) => {
     admin.password = new_pass;
     await admin.save();
     const channelId = process.env.CHANNEL_ID;
-    bot.sendMessage(channelId, `Новый пароль: \n ${new_pass}`);
     res.status(StatusCodes.OK).json({ msg: "Новый пароль отправил" });
   } catch (error) {
     throw new BadRequestError("Error 500");
