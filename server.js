@@ -11,6 +11,7 @@ import authRouter from "./routes/authRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
 import auth_adminRouter from "./routes/auth_adminRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import path from "path";
 
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
@@ -20,6 +21,7 @@ import errorHandlerMiddleware from "./middleware/error-handler.js";
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use("/uploads/files", express.static(path.join("uploads", "files")));
 
 app.get("/", (req, res) => {
   res.json({ msg: "welcom" });
