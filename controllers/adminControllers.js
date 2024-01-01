@@ -32,7 +32,6 @@ const getCategories = async (req, res) => {
 };
 
 const createSubCategory = async (req, res) => {
-  console.log(req.body);
   const { name, categoryId, imageName } = req.body;
   try {
     const subCategory = await SubCategory.create({
@@ -47,7 +46,6 @@ const createSubCategory = async (req, res) => {
 };
 
 const createObject = async (req, res) => {
-  console.log(req.body);
   const { name, subcategory, lat, long, address, contacts, r1, r2, r3, r4 } =
     req.body;
   try {
