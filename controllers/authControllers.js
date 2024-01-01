@@ -1,4 +1,7 @@
 import User from "../models/Users.js";
+import Object from "../models/Object.js";
+import Category from "../models/Category.js";
+import SubCategory from "../models/SubCategory.js";
 import { StatusCodes } from "http-status-codes";
 
 import {
@@ -44,4 +47,15 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user, token });
 };
 
-export { signup, login };
+const getAll = async (req, res) => {
+  try {
+    let categories = await Category.find({});
+    let objects = await Object.find({});
+    let subCategories = await SubCategory.find({});
+    res.status(StatusCodes.OK).json({ categories, subCategories, objects });
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
+};
+
+export { signup, login, getAll };

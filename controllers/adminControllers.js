@@ -33,9 +33,13 @@ const getCategories = async (req, res) => {
 
 const createSubCategory = async (req, res) => {
   console.log(req.body);
-  const { name, categoryId } = req.body;
+  const { name, categoryId, imageName } = req.body;
   try {
-    const subCategory = await SubCategory.create({ name, categoryId });
+    const subCategory = await SubCategory.create({
+      name,
+      categoryId,
+      imageName,
+    });
     res.status(StatusCodes.OK).json(subCategory);
   } catch (error) {
     throw new BadRequestError("Error 500");

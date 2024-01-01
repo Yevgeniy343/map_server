@@ -12,6 +12,11 @@ const SubCategorySchema = new mongoose.Schema(
       required: [true, "Please provide category"],
       trim: true,
     },
+    imageName: {
+      type: String,
+      required: [true, "Please provide imageName"],
+      trim: true,
+    },
   },
   { timestamps: true }
 );
