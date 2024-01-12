@@ -2,6 +2,7 @@ import User from "../models/Users.js";
 import Object from "../models/Object.js";
 import Category from "../models/Category.js";
 import SubCategory from "../models/SubCategory.js";
+import Message from "../models/Message.js";
 import { StatusCodes } from "http-status-codes";
 
 import {
@@ -52,10 +53,24 @@ const getAll = async (req, res) => {
     let categories = await Category.find({});
     let objects = await Object.find({});
     let subCategories = await SubCategory.find({});
-    res.status(StatusCodes.OK).json({ categories, subCategories, objects });
+    let messages = await Message.find({});
+    res
+      .status(StatusCodes.OK)
+      .json({ categories, subCategories, objects, messages });
   } catch (error) {
     throw new BadRequestError("Error 500");
   }
 };
 
-export { signup, login, getAll };
+const createMessage = async (req, res) => {
+  console.log(req.body);
+  const { name, message, objectId } = req.body;
+  try {
+    const messages = await Message.create({ name, message, objectId });
+    res.status(StatusCodes.OK).json(messages);
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
+};
+
+export { signup, login, getAll, createMessage };
