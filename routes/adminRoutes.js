@@ -9,6 +9,7 @@ import {
   addInfo1,
   addInfo2,
   uploadImage,
+  deleteObject,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -20,5 +21,6 @@ router.route("/get_objects").get(getObjects);
 router.route("/addInfo1").post(addInfo1);
 router.route("/addInfo2").post(addInfo2);
 router.route("/uploadImage").post(fileUpload.single("image"), uploadImage);
+router.route("/deleteObject/:objectId").delete(deleteObject);
 
 export default router;

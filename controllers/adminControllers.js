@@ -2,6 +2,7 @@ import Admin from "../models/Admin.js";
 import Object from "../models/Object.js";
 import Category from "../models/Category.js";
 import SubCategory from "../models/SubCategory.js";
+import Message from "../models/Message.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -143,6 +144,19 @@ const uploadImage = async (req, res) => {
   }
 };
 
+const deleteObject = async (req, res) => {
+  try {
+    await Object.findByIdAndDelete(req.params.objectId);
+
+    await Message.deleteMany({ objectId: req.params.objectId });
+    let objects = await Object.find({});
+
+    res.status(StatusCodes.OK).json(objects);
+  } catch (error) {
+    throw new BadRequestError("Error 500");
+  }
+};
+
 export {
   createCategory,
   getCategories,
@@ -152,4 +166,5 @@ export {
   addInfo1,
   addInfo2,
   uploadImage,
+  deleteObject,
 };
