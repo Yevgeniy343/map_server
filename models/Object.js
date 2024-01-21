@@ -29,6 +29,12 @@ const ObjectSchema = new mongoose.Schema(
       r4: {
         type: Number,
       },
+      r5: {
+        type: Number,
+      },
+      r6: {
+        type: Number,
+      },
     },
     location: {
       lat: {
@@ -45,6 +51,30 @@ const ObjectSchema = new mongoose.Schema(
       type: Array,
     },
     image: {
+      type: Array,
+    },
+    services: {
+      type: Array,
+    },
+    programs: {
+      type: Array,
+    },
+    breeds: {
+      type: Array,
+    },
+    shops: {
+      type: Array,
+    },
+    coffee: {
+      type: Array,
+    },
+    organisations: {
+      type: Array,
+    },
+    where: {
+      type: Array,
+    },
+    what: {
       type: Array,
     },
   },

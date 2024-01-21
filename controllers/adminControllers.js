@@ -46,8 +46,20 @@ const createSubCategory = async (req, res) => {
 };
 
 const createObject = async (req, res) => {
-  const { name, subcategory, lat, long, address, contacts, r1, r2, r3, r4 } =
-    req.body;
+  const {
+    name,
+    subcategory,
+    lat,
+    long,
+    address,
+    contacts,
+    r1,
+    r2,
+    r3,
+    r4,
+    r5,
+    r6,
+  } = req.body;
   try {
     const object = await Object.create({
       name,
@@ -55,7 +67,7 @@ const createObject = async (req, res) => {
       address,
       contacts,
       location: { lat, long },
-      reviews: { r1, r2, r3, r4 },
+      reviews: { r1, r2, r3, r4, r5, r6 },
     });
     res.status(StatusCodes.OK).json(object);
   } catch (error) {
