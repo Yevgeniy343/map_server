@@ -54,28 +54,28 @@ const ObjectSchema = new mongoose.Schema(
       type: Array,
     },
     services: {
-      type: Array,
+      type: String,
     },
     programs: {
-      type: Array,
+      type: String,
     },
     breeds: {
-      type: Array,
+      type: String,
     },
     shops: {
-      type: Array,
+      type: String,
     },
     coffee: {
-      type: Array,
+      type: String,
     },
     organisations: {
-      type: Array,
+      type: String,
     },
     where: {
-      type: Array,
+      type: String,
     },
     what: {
-      type: Array,
+      type: String,
     },
   },
   { timestamps: true }
