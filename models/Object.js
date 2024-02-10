@@ -16,6 +16,15 @@ const ObjectSchema = new mongoose.Schema(
     contacts: {
       type: String,
     },
+    site: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
     reviews: {
       r1: {
         type: Number,

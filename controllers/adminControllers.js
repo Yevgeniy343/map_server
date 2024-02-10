@@ -69,6 +69,9 @@ const createObject = async (req, res) => {
     organisations,
     where,
     what,
+    site,
+    phone,
+    email,
   } = req.body;
 
   if (!name) {
@@ -80,6 +83,9 @@ const createObject = async (req, res) => {
       subcategory,
       address,
       contacts,
+      site,
+      phone,
+      email,
       location: { lat, long },
       reviews: { r1, r2, r3, r4, r5, r6 },
       ...(services && { services }),
