@@ -8,6 +8,7 @@ import { generate } from "random-words";
 
 const login = async (req, res) => {
   const { login, password } = req.body;
+  console.log(req.body);
 
   if (!login || !password) {
     throw new BadRequestError("Введите все значения");
